@@ -1,0 +1,303 @@
+:root {
+  --primary: #FEA116;
+  --light: #F1F8FF;
+  --dark: #0F172B;
+  --secondary: #007bff;
+  --error: #dc3545;
+  --success: #28a745;
+  --warning: #ffc107;
+}
+
+/* === Background Wrapper === */
+.user-view-orders-container {
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
+    url('https://neurosciencenews.com/files/2019/05/red-meat-ms-risk-neurosciencnews-public.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 3D Effect Container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 4px 30px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  margin-top: 50px;
+  max-width: 600px;
+  width: 100%;
+  opacity: 1;
+  backdrop-filter: blur(10px);
+  transform: translateY(20px);
+  margin: auto;
+  }
+
+/* Header styling */
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Label styling */
+label {
+  font-weight: 600;
+  color: #007bff;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Error Message Styling */
+.text-danger {
+  font-size: 0.875rem;
+  color: #dc3545;
+  font-size: 0.875rem;
+}
+
+/* Dropdown styling with icon on the right side */
+.dropdown-container {
+  position: relative;
+}
+
+.custom-dropdown {
+  padding-right: 30px; /* Add space for the icon */
+  background-image: url('https://img.icons8.com/ios-filled/50/000000/restaurant.png');
+  background-position: calc(100% - 10px) center;
+  background-repeat: no-repeat;
+  background-size: 18px;
+}
+
+.custom-dropdown:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.5);
+}
+
+/* Icon for dropdown */
+.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 18px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Star rating styling */
+.star-rating {
+  display: flex;
+  gap: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.star-rating span {
+  color: #ccc;
+}
+
+.star-rating span.filled {
+  color: #ffc107;
+}
+
+/* Button styling */
+.btn {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Spinner Styles */
+.spinner-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panWrapper {
+  width: 200px;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
+.pan {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: fit-content;
+  animation: cooking 1.7s infinite;
+}
+
+@keyframes cooking {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: top right;
+  }
+
+  10% {
+    transform: rotate(-4deg);
+    transform-origin: top right;
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+
+}
+ 
+.food {
+  position: absolute;
+  width: 40%;
+  height: 6px;
+  background: linear-gradient(to bottom, rgb(82, 33, 33), rgb(200, 106, 106));
+  left: 10px;
+  border-radius: 50%;
+  animation: flip 1.7s infinite;
+  z-index: 2;
+}
+
+@keyframes flip {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(360deg);
+  }
+
+}
+
+.panBase {
+  z-index: 3;
+  width: 50%;
+  height: 22px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  background: linear-gradient(to top, rgb(3, 156, 156), rgb(10, 191, 191));
+}
+
+.panHandle {
+  width: 40%;
+  background: linear-gradient(to bottom, rgb(18, 18, 18), rgb(74, 74, 74));
+  height: 10px;
+  border-radius: 10px;
+}
+
+.panShadow {
+  width: 70px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.21);
+  margin-left: 15px;
+  border-radius: 10px;
+  animation: shadow 1.7s infinite;
+  filter: blur(5px);
+}
+
+@keyframes shadow {
+  0% {
+    transform: scaleX(0.7);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0.7);
+  }
+
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+ 
+.dialog-box {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+button{
+ padding: 6px 24px;
+}
+ 

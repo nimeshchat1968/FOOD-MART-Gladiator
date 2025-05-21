@@ -1,0 +1,94 @@
+<!-- Spinner -->
+<div *ngIf="isLoading" class="spinner-overlay" >
+  <div class="loader">
+    <div class="panWrapper">
+      <div class="pan">
+        <div class="food"></div>
+        <div class="panBase"></div>
+        <div class="panHandle"></div>
+      </div>
+      <div class="panShadow"></div>
+      </div>
+  </div>
+</div>
+
+<!-- Food List Container -->
+<div class="user-view-food-container">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Food List</h2>
+
+    <div class="search-container">
+      <input type="text" [(ngModel)]="search" class="search-input" placeholder="Search for food..." />
+      <button class="search-button" (click)="searchProduct()">Search</button>
+      <button class="clear-button" (click)="reset()">Clear</button>
+    </div>
+
+    <div class="food-list-container">
+      <div *ngFor="let food of paginatedFoods" class="food-card">
+        <img [src]="food.photo" class="food-image" alt="{{ food.foodName }}">
+        <div class="food-info">
+          <p class="food-name">{{ food.foodName | titlecase}}</p>
+          <p class="food-price">Price: ₹{{ food.price }}</p>
+          <p class="food-quantity">Stock Quantity: {{ food.stockQuantity }}</p>
+        </div>
+
+        <h3 *ngIf="food.stockQuantity === 0" class="out-of-stock-message">Out of stock</h3>
+
+        <button class="place-order-btn" [disabled]="food.stockQuantity === 0" (click)="openOrderPopup(food)">
+          Place Order
+        </button>
+      </div>
+    </div>
+
+    <p *ngIf="noItemFound" class="text-muted">No food items found matching your search.</p>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls" *ngIf="foods.length > itemsPerPage">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+
+      <button 
+        *ngFor="let page of totalPages" 
+        (click)="changePage(page)" 
+        [class.active]="page === currentPage">
+        {{ page }}
+      </button>
+
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages.length">Next</button>
+    </div>
+
+    <!-- Order Popup -->
+    <div *ngIf="showOrderPopup" class="order-popup-overlay">
+      <div class="order-popup">
+        <h4>{{ selectedFood?.foodName | titlecase }}</h4>
+        <p>Price: {{ selectedFood?.price | currency:'INR'}}</p>
+        <label for="quantity">Quantity:</label>
+        <input 
+          type="number" 
+          id="quantity" 
+          [(ngModel)]="orderQuantity" 
+          (input)="updateTotalAmount()" 
+          min="1" 
+          [max]="selectedFood?.stockQuantity" 
+          class="form-control">
+        <p>Total: ₹{{ totalAmount }}</p>
+
+        <div class="order-popup-buttons">
+          <button class="btn btn-success" (click)="confirmOrder()">Confirm Order</button>
+          <button class="btn btn-secondary" (click)="closeOrderPopup()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Success Popup -->
+    <div *ngIf="orderSuccess" class="order-success-popup-overlay">
+      <div class="order-success-popup">
+        <h3>Order Placed Successfully</h3>
+        <h5><strong>Product Name:</strong> {{ orderSuccessFoodName | titlecase}}</h5>
+        <p><strong>Quantity:</strong> {{ orderQuantity }}</p>
+        <p><strong>Total Amount:</strong> ₹{{ totalAmount }}</p>
+        <p><strong>Order Date:</strong> {{ orderDate }}</p>
+        <button class="btn btn-primary" (click)="closeOrderSuccessPopup()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

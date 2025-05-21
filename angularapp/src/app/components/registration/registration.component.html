@@ -1,0 +1,72 @@
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="container mt-5 p-5 rounded shadow-lg bg-light">
+    <h2 class="text-center text-primary fw-bold">Register</h2>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+
+      <div class="mb-4">
+        <b>Username</b>
+        <input type="text" name="userName" class="form-control border-primary" [(ngModel)]="user.username" required minlength="3" #userName="ngModel">
+        <div *ngIf="userName.invalid && userName.touched" class="text-danger mt-1">
+          <div *ngIf="userName.errors?.required">Username is required</div>
+          <div *ngIf="userName.errors?.minlength">Username must be at least 3 characters long</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <b>Email</b>
+        <input type="email" name="email" class="form-control border-primary" [(ngModel)]="user.email" required email #email="ngModel">
+        <div *ngIf="email.invalid && email.touched" class="text-danger mt-1">
+          <div *ngIf="email.errors?.required">Valid email is required</div>
+          <div *ngIf="email.errors?.email">Email format is invalid</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <b>Mobile Number</b>
+        <input type="text" name="mobileNumber" class="form-control border-primary" [(ngModel)]="user.mobileNumber" required pattern="^[0-9]{10}$" #mobileNumber="ngModel">
+        <div *ngIf="mobileNumber.invalid && mobileNumber.touched" class="text-danger mt-1">
+          <div *ngIf="mobileNumber.errors?.required">Mobile number is required</div>
+          <div *ngIf="mobileNumber.errors?.pattern">Mobile number must be 10 digits</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <b>Password</b>
+        <input type="password" name="password" class="form-control border-primary" [(ngModel)]="user.password" required minlength="6" #password="ngModel">
+        <div *ngIf="password.invalid && password.touched" class="text-danger mt-1">
+          <div *ngIf="password.errors?.required">Password is required</div>
+          <div *ngIf="password.errors?.minlength">Password must be at least 6 characters long</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <b>Confirm Password</b>
+        <input type="password" name="confirmPassword" class="form-control border-primary" [(ngModel)]="user.confirmPassword" required #confirmPassword="ngModel">
+        <div *ngIf="confirmPassword.invalid && confirmPassword.touched" class="text-danger mt-1">
+          <div *ngIf="confirmPassword.errors?.required">Confirm password is required</div>
+        </div>
+      </div>
+
+      <button class="btn btn-success w-100 py-2 fs-5 shadow-sm" type="submit" [disabled]="registerForm.invalid">Register</button>
+
+      <div class="text-center mt-3">
+        <span class="fw-semibold">Already have an account?</span>
+        <a routerLink="/login" class="text-primary fw-bold">Login</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog-box">
+    <p>Registration Successful!</p>
+    <button class="btn btn-primary" (click)="onDialogConfirm()">Ok</button>
+  </div>
+</div>
+
+<div class="dialog-overlay" *ngIf="mismatchDialog">
+  <div class="dialog-box">
+    <p>Passwords do not match!</p>
+    <button class="btn btn-primary" (click)="onMismatchDialogConfirm()">Ok</button>
+  </div>
+</div>

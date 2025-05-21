@@ -1,0 +1,450 @@
+:root {
+  --primary: #FEA116;
+  --light: #F1F8FF;
+  --dark: #0F172B;
+}
+
+/* === Background Wrapper === */
+.user-view-food-container {
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
+    url('https://neurosciencenews.com/files/2019/05/red-meat-ms-risk-neurosciencnews-public.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Food List Container */
+.food-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Increased the gap between food cards */
+  justify-content: center;
+}
+
+/* Food Cards */
+.food-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px; /* Add margin bottom to separate cards vertically */
+}
+
+.food-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.food-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.food-card:hover .food-image {
+  opacity: 0.9;
+}
+
+.food-info {
+  padding: 10px;
+}
+
+.food-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.food-price,
+.food-quantity {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* Place Order Button Styling */
+.place-order-btn {
+  margin-top: 15px; /* Space from other elements */
+  margin-bottom: 10px;
+  padding: 10px 20px; /* Adjust padding */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  width: auto; /* Make the width auto so it's centered */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.place-order-btn[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.place-order-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Make it slightly bigger when hovered */
+}
+
+/* === Order Popup === */
+.order-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.order-popup {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.order-popup h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  font-family: 'Arial', sans-serif;
+}
+
+.order-popup p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.order-popup .form-control {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Popup Button Styling */
+.order-popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.order-popup-buttons button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 48%; /* Make both buttons evenly spaced */
+}
+
+.order-popup-buttons button:hover {
+  transform: scale(1.05);
+}
+
+/* Confirm Button */
+.order-popup-buttons .btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.order-popup-buttons .btn-success:hover {
+  background-color: #218838;
+}
+
+/* Cancel Button */
+.order-popup-buttons .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.order-popup-buttons .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* === Success Pop-up === */
+.order-success-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.order-success-popup {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+
+.order-success-popup h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.order-success-popup p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.order-success-popup button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.order-success-popup button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Search Box */
+.search-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 8px;
+  font-size: 16px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-button,
+.clear-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-button:hover,
+.clear-button:hover {
+  background-color: #0056b3;
+}
+
+/* Spinner */
+.spinner-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panWrapper {
+  width: 200px;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
+.pan {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: fit-content;
+  animation: cooking 1.7s infinite;
+}
+
+@keyframes cooking {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: top right;
+  }
+
+  10% {
+    transform: rotate(-4deg);
+    transform-origin: top right;
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+
+}
+ 
+.food {
+  position: absolute;
+  width: 40%;
+  height: 6px;
+  background: linear-gradient(to bottom, rgb(82, 33, 33), rgb(200, 106, 106));
+  left: 10px;
+  border-radius: 50%;
+  animation: flip 1.7s infinite;
+  z-index: 2;
+}
+
+@keyframes flip {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(360deg);
+  }
+
+}
+
+.panBase {
+  z-index: 3;
+  width: 50%;
+  height: 22px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  background: linear-gradient(to top, rgb(3, 156, 156), rgb(10, 191, 191));
+}
+
+.panHandle {
+  width: 40%;
+  background: linear-gradient(to bottom, rgb(18, 18, 18), rgb(74, 74, 74));
+  height: 10px;
+  border-radius: 10px;
+}
+
+.panShadow {
+  width: 70px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.21);
+  margin-left: 15px;
+  border-radius: 10px;
+  animation: shadow 1.7s infinite;
+  filter: blur(5px);
+}
+
+@keyframes shadow {
+  0% {
+    transform: scaleX(0.7);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0.7);
+  }
+
+}
+
+ 
+
+/* Heading Styles */
+h2.text-center.mb-4 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  margin-bottom: 40px;
+}
+.out-of-stock-message {
+  color: #ff0000; /* Red color */
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.pagination-controls button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.pagination-controls button:hover:not(.active) {
+  background-color: #e0e0e0;
+}
+
+.pagination-controls button.active {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  border-color: #007bff;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}

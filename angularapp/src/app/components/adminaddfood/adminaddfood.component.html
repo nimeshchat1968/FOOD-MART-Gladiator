@@ -1,0 +1,126 @@
+<!-- Spinner -->
+<div *ngIf="isLoading" class="spinner-overlay" >
+  <div class="loader">
+    <div class="panWrapper">
+      <div class="pan">
+        <div class="food"></div>
+        <div class="panBase"></div>
+        <div class="panHandle"></div>
+      </div>
+      <div class="panShadow"></div>
+      </div>
+  </div>
+</div>
+
+<!-- Form with background -->
+<div *ngIf="!isLoading" class="form-bg">
+  <div class="form-overlay">
+    <div class="card shadow-lg p-4">
+
+      <h2 class="text-center mb-4" *ngIf="!editId">Add Food Item</h2>
+      <h2 class="text-center mb-4" *ngIf="editId">Edit Food Item</h2>
+
+      <form (ngSubmit)="addFood()" #foodForm="ngForm">
+        <div class="form-group mb-3">
+          <label for="foodName" class="form-label">Enter Food Name:</label>
+          <input
+            type="text"
+            id="foodName"
+            class="form-control"
+            [(ngModel)]="food.foodName"
+            name="foodName"
+            placeholder="Enter food name"
+            required
+            #foodName="ngModel" />
+          <div *ngIf="foodName.invalid && foodName.touched" class="text-danger">
+            Food name is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="price" class="form-label">Price:</label>
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            [(ngModel)]="food.price"
+            name="price"
+            placeholder="Enter food price"
+            required
+            min="0"
+            #price="ngModel" />
+          <div *ngIf="price.invalid && price.touched" class="text-danger">
+            <div *ngIf="price.errors?.required">Price is required.</div>
+            <div *ngIf="price.errors?.min">Price cannot be negative.</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="stockQuantity" class="form-label">Stock Quantity:</label>
+          <input
+            type="number"
+            id="stockQuantity"
+            class="form-control"
+            [(ngModel)]="food.stockQuantity"
+            name="stockQuantity"
+            placeholder="Enter stock quantity"
+            required
+            min="0"
+            step="1"
+            pattern="^\d+$"
+            #stockQuantity="ngModel" />
+           
+          <div *ngIf="stockQuantity.invalid && stockQuantity.touched" class="text-danger">
+            <div *ngIf="stockQuantity.errors?.required">Stock quantity is required.</div>
+            <div *ngIf="stockQuantity.errors?.min">Stock quantity cannot be negative.</div>
+            <div *ngIf="stockQuantity.errors?.pattern">Stock quantity must be a positive whole number.</div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="photo" class="form-label">Photo:</label>
+          <input 
+            type="file" 
+            id="photoFile" 
+            name="photoFile" 
+            accept=".jpg,.png" 
+            (change)="onFileChange($event, 'photoFile')" 
+            #file="ngModel" 
+            [(ngModel)]="food.photo" 
+            required />
+          <div *ngIf="file.invalid && file.touched" class="text-danger">
+            Photo is required.
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary me-2" [disabled]="foodForm.invalid">
+            {{ editId ? 'Update Food' : 'Add Food' }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="router.navigate(['/adminViewFood'])">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Success Dialog -->
+<div class="dialog-overlay" *ngIf="showDialog">
+   <div class="dialog-box">
+   <h2>{{ dialogMessage }}</h2>
+   <img *ngIf="food.photo" [src]="food.photo" alt="Food" class="food-image" />
+   <p *ngIf="dialogMessage === 'Food added successfully!'">
+  <b>Food Name:</b> {{ food.foodName | titlecase }}<br>
+  <b>Price:</b> {{ food.price | currency:'INR' }}<br>
+  <b>Stock Quantity:</b> {{ food.stockQuantity }}
+   </p>
+   <button class="btn btn-primary" (click)="onDialogConfirm()">OK</button>
+   </div>
+  </div>
+  

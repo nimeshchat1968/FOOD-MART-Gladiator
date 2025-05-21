@@ -1,0 +1,32 @@
+<configuration>
+<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+<encoder>
+<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+</encoder>
+</appender>
+<appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<file>logs/myapp.log</file>
+<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<fileNamePattern>logs/myapp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+<maxFileSize>100KB</maxFileSize>
+<maxHistory>30</maxHistory>
+</rollingPolicy>
+<encoder>
+<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+</encoder>
+<filter class="ch.qos.logback.classic.filter.LevelFilter">
+<level>INFO</level>
+<onMatch>ACCEPT</onMatch>
+<onMismatch>DENY</onMismatch>
+</filter>
+<filter class="ch.qos.logback.classic.filter.LevelFilter">
+<level>ERROR</level>
+<onMatch>ACCEPT</onMatch>
+<onMismatch>DENY</onMismatch>
+</filter>
+</appender>
+<root level="INFO">
+<appender-ref ref="CONSOLE"/>
+<appender-ref ref="ROLLING_FILE"/>
+</root>
+</configuration>

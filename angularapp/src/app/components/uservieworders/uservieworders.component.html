@@ -1,0 +1,133 @@
+<!-- Spinner Overlay -->
+<div *ngIf="isLoading" class="spinner-overlay" >
+  <div class="loader">
+    <div class="panWrapper">
+      <div class="pan">
+        <div class="food"></div>
+        <div class="panBase"></div>
+        <div class="panHandle"></div>
+      </div>
+      <div class="panShadow"></div>
+      </div>
+  </div>
+</div>
+  
+  <!-- Wrapper for Background -->
+  <div class="user-view-orders-container">
+    <div class="container mt-5">
+      <!-- My Orders Section -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-center">My Orders</h2>
+        <button class="btn btn-primary" (click)="refreshPage()">Refresh</button>
+      </div>
+  
+      <!-- Error Message if any -->
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+      <!-- Orders Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" *ngIf="orders.length > 0">
+          <thead class="thead-dark">
+            <tr>
+              <th>Order ID</th>
+              <th>Food Id</th>
+              <th>Date</th>
+              <th>Food Name</th>
+              <th>Quantity</th>
+              <th>Total Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of paginatedOrders">
+              <td>{{ order.orderId }}</td>
+              <td>{{ order.food.foodId }}</td>
+              <td>{{ order.orderDate | date: 'dd MMM yyyy' }}</td>
+              <td>{{ order.food.foodName | titlecase }}</td>  
+              <td>{{ order.quantity }}</td>
+              <td>{{ order.totalAmount | currency: 'INR' }}</td>
+              <td>{{ order.orderStatus }}</td>
+              <td>
+                <!-- Show Cancel button only if status is "Pending" -->
+                <button *ngIf="order.orderStatus === 'Pending' || order.orderStatus === 'Making Food'" 
+                class="btn btn-danger btn-sm" (click)="confirmDelete(order)">Cancel</button>
+  
+  
+                <!-- Disable Cancel button and show an alert if status is "On The Way" -->
+                <button *ngIf="order.orderStatus === 'On the way'" 
+                  class="btn btn-danger btn-sm" 
+                  (click)="showPopup = true">
+                  Cancel
+                </button>
+                <!-- Bootstrap Confirmation Modal for "On The Way" Orders -->
+                <div *ngIf="showPopup" class="modal fade show d-block" tabindex="-1" role="dialog" style="display: flex; align-items: center; justify-content: center;">
+  
+                 <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          <p>Your order is already on the way, so it cannot be canceled.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closePopup()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+                <!-- Show Feedback button instead of Cancel if status is "Delivered" -->
+                <button *ngIf="order.orderStatus === 'Delivered'" 
+                        class="btn btn-success btn-sm" 
+                        (click)="redirectToFeedback()">
+                  Give Feedback
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Confirmation Modal for Deletion -->
+      <div *ngIf="showConfirmation" class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Order Cancel</h5>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to cancel this order?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="deleteOrder()">Yes</button>
+              <button type="button" class="btn btn-secondary" (click)="cancelDelete()">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div> 
+  </div>
+  <nav *ngIf="orders.length > pageSize">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="changePage(currentPage - 1)">
+          <i class="fa-solid fa-chevron-left"></i> Previous
+        </button>
+      </li>
+  
+      <li class="page-item" *ngFor="let page of totalPages">
+        <button class="page-link" (click)="changePage(page)">
+          {{ page }}
+        </button>
+      </li>
+  
+      <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+        <button class="page-link" (click)="changePage(currentPage + 1)">
+          Next <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+  

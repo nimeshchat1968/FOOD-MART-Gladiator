@@ -1,0 +1,375 @@
+
+:root {
+  --primary: #FEA116;
+  --light: #F1F8FF;
+  --dark: #0F172B;
+}
+
+/* === Background Wrapper === */
+.order-bg {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
+    url('https://neurosciencenews.com/files/2019/05/red-meat-ms-risk-neurosciencnews-public.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Container overlay */
+.container {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+}
+
+/* Spinner */
+.spinner-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panWrapper {
+  width: 200px;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
+.pan {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: fit-content;
+  animation: cooking 1.7s infinite;
+}
+
+@keyframes cooking {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: top right;
+  }
+
+  10% {
+    transform: rotate(-4deg);
+    transform-origin: top right;
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+
+}
+ 
+.food {
+  position: absolute;
+  width: 40%;
+  height: 6px;
+  background: linear-gradient(to bottom, rgb(82, 33, 33), rgb(200, 106, 106));
+  left: 10px;
+  border-radius: 50%;
+  animation: flip 1.7s infinite;
+  z-index: 2;
+}
+
+@keyframes flip {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(360deg);
+  }
+
+}
+
+.panBase {
+  z-index: 3;
+  width: 50%;
+  height: 22px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  background: linear-gradient(to top, rgb(3, 156, 156), rgb(10, 191, 191));
+}
+
+.panHandle {
+  width: 40%;
+  background: linear-gradient(to bottom, rgb(18, 18, 18), rgb(74, 74, 74));
+  height: 10px;
+  border-radius: 10px;
+}
+
+.panShadow {
+  width: 70px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.21);
+  margin-left: 15px;
+  border-radius: 10px;
+  animation: shadow 1.7s infinite;
+  filter: blur(5px);
+}
+
+@keyframes shadow {
+  0% {
+    transform: scaleX(0.7);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0.7);
+  }
+
+}
+
+/* Header */
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #0F172B;
+}
+
+/* Table */
+.table-responsive {
+  margin: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+
+.table th, .table td {
+  padding: 12px 16px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+.thead-dark th {
+  background-color: #343a40;
+  color: white;
+}
+
+/* Buttons */
+.btn {
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  margin: 4px 2px;
+  transition: 0.3s ease;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+  color: #212529;
+}
+.btn-warning:hover {
+  background-color: #e0a800;
+  color: #fff;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border: none;
+  color: #fff;
+}
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Disabled Button */
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Modal */
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+  margin: 60px auto;
+  max-width: 500px;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0F172B;
+}
+
+.modal-body p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #dee2e6;
+  padding-top: 10px;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Dialog Box (Popup for delete success) */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialog-box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.dialog-box p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #393c39;
+  font-weight: 500;
+}
+
+.dialog-box button {
+  padding: 8px 20px;
+  font-weight: 600;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 6px;
+  color: #393c39;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3 ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.dialog-box button:hover {
+  background-color: #e28b00;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Misc */
+.text-muted {
+  color: #6c757d;
+}

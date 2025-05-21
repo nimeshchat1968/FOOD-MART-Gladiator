@@ -1,0 +1,47 @@
+<div *ngIf="isLoading" class="spinner-overlay" >
+  <div class="loader">
+    <div class="panWrapper">
+      <div class="pan">
+        <div class="food"></div>
+        <div class="panBase"></div>
+        <div class="panHandle"></div>
+      </div>
+      <div class="panShadow"></div>
+      </div>
+  </div>
+</div>
+
+<div class="box">
+  <h2 class="text-center fw-bold">Order Analysis</h2>
+  <div class="chart-container">
+    <p>Bar Chart</p>
+    <canvas #barChart width="100" height="25"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <p>Line Chart</p>
+    <canvas #lineChart width="100" height="25"></canvas>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-container">
+      <p>Radar Chart</p>
+      <canvas #radarChart width="500"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <p>Pie Chart</p>
+      <canvas #pieChart width="500"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <p>Polar Area Chart</p>
+      <canvas #polarAreaChart width="500"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <p>Doughnut Chart</p>
+      <canvas #doughnutChart width="500"></canvas>
+    </div>
+  </div>
+</div>

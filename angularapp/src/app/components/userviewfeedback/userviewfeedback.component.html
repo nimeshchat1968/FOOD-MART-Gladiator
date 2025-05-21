@@ -1,0 +1,81 @@
+<!-- Spinner Overlay -->
+<div *ngIf="isLoading" class="spinner-overlay" >
+  <div class="loader">
+    <div class="panWrapper">
+      <div class="pan">
+        <div class="food"></div>
+        <div class="panBase"></div>
+        <div class="panHandle"></div>
+      </div>
+      <div class="panShadow"></div>
+      </div>
+  </div>
+</div>
+  
+  <!-- Wrapper for Background Image -->
+  <div class="background-wrapper">
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">My Feedback</h2>
+  
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+  
+      <div class="table-responsive" *ngIf="paginatedFeedbacks.length > 0">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Feedback Id</th>
+              <th>Food Name</th>
+              <th>Feedback</th>
+              <th>Rating</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of paginatedFeedbacks">
+              <td>{{feedback.feedbackId}}</td> 
+              <td>{{ feedback.food.foodName }}</td>
+              <td>{{ feedback.feedbackText }}</td>
+              <td>
+                <div class="star-rating">
+                  <span *ngFor="let star of [1, 2, 3, 4, 5]" [class.filled]="star <= feedback.rating">&#9733;</span>
+                </div>
+              </td>
+              <td>{{ feedback.date | date: 'dd MMM yyyy' }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="confirmDelete(feedback.feedbackId)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <p *ngIf="paginatedFeedbacks.length === 0" class="text-center text-muted">No feedback available.</p>
+  
+      <!-- ✅ Pagination Controls -->
+      <div class="pagination-container">
+        <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+          Previous
+        </button>
+        <span *ngFor="let page of totalPages" (click)="changePage(page)" [class.active]="page === currentPage">
+          {{ page }}
+        </span>
+        <button class="btn btn-primary" [disabled]="currentPage === totalPages.length" (click)="changePage(currentPage + 1)">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ❌ Confirmation Popup (moved outside main content) -->
+  <div *ngIf="showDeleteConfirmation" class="modal-overlay">
+    <div class="confirmation-popup">
+      <h3 class="modal-title">Delete Confirmation</h3>
+      <p>Are you sure you want to delete this feedback?</p>
+      <div class="confirmation-buttons">
+        <button class="btn btn-danger" (click)="deleteFeedback(deleteFeedbackId)">Yes</button>
+        <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+      </div>
+    </div>
+  </div>
+  

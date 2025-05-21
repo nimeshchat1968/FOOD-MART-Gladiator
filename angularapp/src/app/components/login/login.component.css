@@ -1,0 +1,55 @@
+.container-fluid {
+  background: linear-gradient(rgba(30, 38, 59, 0.9), rgba(30, 38, 56, 0.9)), url('https://neurosciencenews.com/files/2019/05/red-meat-ms-risk-neurosciencnews-public.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.login-box {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 100px; /* Move the form upwards */
+  max-width: 400px; /* Decrease the maximum width */
+  width: 100%;
+}
+
+.login-box h2 {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.login-box .form-control {
+  border-color: var(--primary);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.login-box .form-control:focus {
+  box-shadow: 0 0 5px rgba(254, 161, 22, 0.5);
+}
+
+.login-box .btn-primary {
+  background-color: rgb(76, 76, 251);
+  border-color: var(--primary);
+  border-radius: 8px;
+  transition: background-color 0.3s, border-color 0.3s;
+  color: blackk; /* Ensure text is visible */
+  display: block; /* Ensure the button is displayed */
+}
+
+.login-box .btn-link {
+  color: var(--primary);
+  transition: color 0.3s;
+}
+
+.login-box .btn-link:hover {
+  color: #e6950f; /* Slightly darker shade of primary */
+}
+
+.login-box .text-danger {
+  font-size: 0.875rem;
+}
+
+.login-box .small {
+  font-size: 0.875rem;
+}
